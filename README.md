@@ -2,6 +2,14 @@
 
 This javascript module allows communication between a host application and the Augmented Writing Integration of 100 Worte in an IFrame. The 100 Worte UI is able to send the text from Augmented Writing to the parent window and can receive the values to display from the parent.
 
+## IFrame optimized UI
+
+The UIs optimized for the IFrame can be found at
+
+- `/dashboard/integration/augmented-writing-c` - Augmented Writing Customer Intelligence
+- `/dashboard/integration/augmented-writing-ti` - Augmented Writing Talent Intelligence
+- `/dashboard/integration/augmented-writing-b` - Augmented Writing Brand Intelligence
+
 ## Integration
 
 The basic usage is shown in the `index.html` file as an example. It represents the host application in a real life application.
