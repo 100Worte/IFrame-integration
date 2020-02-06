@@ -4,7 +4,7 @@ This javascript module allows communication between a host application and the A
 
 ## IFrame optimized UI
 
-The UIs optimized for the IFrame can be found at
+The UIs which are optimized for the IFrame and should be used as IFrame source can be found at:
 
 - `/dashboard/integration/augmented-writing-c` - Augmented Writing Customer Intelligence
 - `/dashboard/integration/augmented-writing-ti` - Augmented Writing Talent Intelligence
