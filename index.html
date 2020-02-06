@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>100W - IFrame Example</title>
+</head>
+<body>
+
+  <h1>Parent website or application including IFrame</h1>
+  <br/>
+  <div id="results"></div>
+  <iframe src="http://dev.100worte.de/dashboard/integration/augmented-writing-c" id="child-iframe" width="1200" height="800"></iframe>
+
+  <script type="text/javascript" src="./dist/100worte-iframe-host.min.js"></script>
+  <script>
+    // Using "subscribeTextListener" to receive text sent from the IFrame and passing it to the callback
+    window.addEventListener('load', subscribeTextListener(callback));
+
+    // Personal API Key (Please change)
+    var xApiKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+    var url = "https://dev.100worte.de/v1/api/augmented_writing_customer/analyses_temp_profile";
+
+    // These values are dummy values. In a real world application they would be received from the 100 Worte API
+    // by analysing a Customer first
+    var customerProfile = {
+      "jointPosAchieve": 0.1,
+      "jointPosAffil": 0.02,
+      "jointPosPower": 0.03,
+      "analytics": 0.04,
+      "authenticity": 0.05,
+      "emotionality": 0.06,
+      "orientation": 0.07,
+      "gender": 0.08
+    };
+
+    // Get the iframe element
+    var childIframe = document.getElementById('child-iframe');
+
+    // The callback is called whem the user triggers an analysis.
+    // This should trigger an API call in the host application
+    function callback(text) {
+      var payload = {
+        "text": text,
+        "customer-profile": customerProfile,
+      };
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // The response from the API call is sent into the iframe for visualisation
+          sendAugmentedWritingResult(JSON.parse(this.response), childIframe);
+        }
+      };
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("x-api-key", xApiKey);
+      xhttp.setRequestHeader('Content-Type', 'application/json');
+      xhttp.send(JSON.stringify(payload));
+    }
+  </script>
+</body>
+</html>
